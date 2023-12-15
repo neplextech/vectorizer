@@ -66,6 +66,6 @@ Generated under the following configuration:
 }
 ```
 
-| Raster Image                        | Vector Image                        |
-| ----------------------------------- | ----------------------------------- |
-| ![Raster Image](example/raster.png) | ![Vector Image](example/vector.svg) |
+| Raster Image                                                                                         | Vector Image                                                                                     |
+| ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| ![Raster Image](https://raw.githubusercontent.com/neplextech/vectorizer/main/example/anime-girl.png) | ![Vector Image](https://raw.githubusercontent.com/neplextech/vectorizer/main/example/result.svg) |
