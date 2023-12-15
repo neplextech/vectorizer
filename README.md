@@ -1,6 +1,6 @@
 # Vectrace
 
-A Node.js library to convert raster images to vector graphics using [VTracer](https://github.com/visioncortex/vtracer).
+A simple Node.js library to convert raster images into svg using [VTracer](https://github.com/visioncortex/vtracer).
 
 ## Installation
 

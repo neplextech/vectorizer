@@ -1,6 +1,7 @@
 {
   "name": "vectrace",
   "version": "0.0.0",
+  "description": "A simple Node.js library to convert raster images into svg",
   "main": "index.js",
   "types": "index.d.ts",
   "napi": {
@@ -23,6 +24,11 @@
     }
   },
   "license": "MIT",
+  "author": "twlite <hello@twlite.dev>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/neplextech/vectrace"
+  },
   "devDependencies": {
     "@napi-rs/cli": "^2.17.0",
     "@napi-rs/image": "^1.7.0",
