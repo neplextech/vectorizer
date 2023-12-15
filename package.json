@@ -1,11 +1,11 @@
 {
-  "name": "vectrace",
-  "version": "0.0.0",
+  "name": "@neplex/vectorizer",
+  "version": "0.0.1",
   "description": "A simple Node.js library to convert raster images into svg",
   "main": "index.js",
   "types": "index.d.ts",
   "napi": {
-    "name": "vectrace",
+    "name": "vectorizer",
     "triples": {
       "additional": [
         "aarch64-apple-darwin",

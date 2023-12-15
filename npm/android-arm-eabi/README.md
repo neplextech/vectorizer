@@ -1,3 +1,3 @@
-# `vectrace-android-arm-eabi`
+# `@neplex/vectorizer-android-arm-eabi`
 
-This is the **armv7-linux-androideabi** binary for `vectrace`
+This is the **armv7-linux-androideabi** binary for `@neplex/vectorizer`

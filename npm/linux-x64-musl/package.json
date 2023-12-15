@@ -1,5 +1,5 @@
 {
-  "name": "vectrace-linux-x64-musl",
+  "name": "@neplex/vectorizer-linux-x64-musl",
   "version": "0.0.0",
   "os": [
     "linux"
@@ -7,13 +7,19 @@
   "cpu": [
     "x64"
   ],
-  "main": "vectrace.linux-x64-musl.node",
+  "main": "vectorizer.linux-x64-musl.node",
   "files": [
-    "vectrace.linux-x64-musl.node"
+    "vectorizer.linux-x64-musl.node"
   ],
+  "description": "A simple Node.js library to convert raster images into svg",
+  "author": "twlite <hello@twlite.dev>",
   "license": "MIT",
   "engines": {
     "node": ">= 10"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/neplextech/vectrace"
   },
   "libc": [
     "musl"

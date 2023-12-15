@@ -1,17 +1,22 @@
-# Vectrace
+# @neplex/vectorizer
 
 A simple Node.js library to convert raster images into svg using [VTracer](https://github.com/visioncortex/vtracer).
 
 ## Installation
 
 ```bash
-npm install vectrace
+npm install @neplex/vectorizer
 ```
 
 ## Usage
 
 ```js
-import { vectorize, ColorMode, Hierarchial, PathSimplifyMode } from 'vectrace';
+import {
+  vectorize,
+  ColorMode,
+  Hierarchial,
+  PathSimplifyMode,
+} from '@neplex/vectorizer';
 import { Transformer } from '@napi-rs/image';
 import { readFile, writeFile } from 'node:fs/promises';
 

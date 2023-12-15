@@ -1,3 +1,3 @@
-# `vectrace-linux-x64-musl`
+# `@neplex/vectorizer-linux-x64-musl`
 
-This is the **x86_64-unknown-linux-musl** binary for `vectrace`
+This is the **x86_64-unknown-linux-musl** binary for `@neplex/vectorizer`

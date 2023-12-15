@@ -1,3 +1,3 @@
-# `vectrace-win32-arm64-msvc`
+# `@neplex/vectorizer-win32-arm64-msvc`
 
-This is the **aarch64-pc-windows-msvc** binary for `vectrace`
+This is the **aarch64-pc-windows-msvc** binary for `@neplex/vectorizer`

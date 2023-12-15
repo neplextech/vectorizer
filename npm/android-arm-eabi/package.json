@@ -1,5 +1,5 @@
 {
-  "name": "vectrace-android-arm-eabi",
+  "name": "@neplex/vectorizer-android-arm-eabi",
   "version": "0.0.0",
   "os": [
     "android"
@@ -7,12 +7,18 @@
   "cpu": [
     "arm"
   ],
-  "main": "vectrace.android-arm-eabi.node",
+  "main": "vectorizer.android-arm-eabi.node",
   "files": [
-    "vectrace.android-arm-eabi.node"
+    "vectorizer.android-arm-eabi.node"
   ],
+  "description": "A simple Node.js library to convert raster images into svg",
+  "author": "twlite <hello@twlite.dev>",
   "license": "MIT",
   "engines": {
     "node": ">= 10"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/neplextech/vectrace"
   }
 }

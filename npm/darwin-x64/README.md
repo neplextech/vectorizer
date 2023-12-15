@@ -1,3 +1,3 @@
-# `vectrace-darwin-x64`
+# `@neplex/vectorizer-darwin-x64`
 
-This is the **x86_64-apple-darwin** binary for `vectrace`
+This is the **x86_64-apple-darwin** binary for `@neplex/vectorizer`

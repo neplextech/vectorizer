@@ -1,3 +1,3 @@
-# `vectrace-linux-arm64-gnu`
+# `@neplex/vectorizer-linux-arm64-gnu`
 
-This is the **aarch64-unknown-linux-gnu** binary for `vectrace`
+This is the **aarch64-unknown-linux-gnu** binary for `@neplex/vectorizer`

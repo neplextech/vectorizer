@@ -1,5 +1,5 @@
 {
-  "name": "vectrace-linux-arm-gnueabihf",
+  "name": "@neplex/vectorizer-linux-arm-gnueabihf",
   "version": "0.0.0",
   "os": [
     "linux"
@@ -7,12 +7,18 @@
   "cpu": [
     "arm"
   ],
-  "main": "vectrace.linux-arm-gnueabihf.node",
+  "main": "vectorizer.linux-arm-gnueabihf.node",
   "files": [
-    "vectrace.linux-arm-gnueabihf.node"
+    "vectorizer.linux-arm-gnueabihf.node"
   ],
+  "description": "A simple Node.js library to convert raster images into svg",
+  "author": "twlite <hello@twlite.dev>",
   "license": "MIT",
   "engines": {
     "node": ">= 10"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/neplextech/vectrace"
   }
 }

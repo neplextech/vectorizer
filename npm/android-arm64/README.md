@@ -1,3 +1,3 @@
-# `vectrace-android-arm64`
+# `@neplex/vectorizer-android-arm64`
 
-This is the **aarch64-linux-android** binary for `vectrace`
+This is the **aarch64-linux-android** binary for `@neplex/vectorizer`

@@ -1,15 +1,21 @@
 {
-  "name": "vectrace-darwin-universal",
+  "name": "@neplex/vectorizer-darwin-universal",
   "version": "0.0.0",
   "os": [
     "darwin"
   ],
-  "main": "vectrace.darwin-universal.node",
+  "main": "vectorizer.darwin-universal.node",
   "files": [
-    "vectrace.darwin-universal.node"
+    "vectorizer.darwin-universal.node"
   ],
+  "description": "A simple Node.js library to convert raster images into svg",
+  "author": "twlite <hello@twlite.dev>",
   "license": "MIT",
   "engines": {
     "node": ">= 10"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/neplextech/vectrace"
   }
 }

@@ -157,6 +157,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@neplex/vectorizer@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "@neplex/vectorizer@workspace:."
+  dependencies:
+    "@napi-rs/cli": "npm:^2.17.0"
+    "@napi-rs/image": "npm:^1.7.0"
+    "@types/node": "npm:^20.10.4"
+    ava: "npm:^5.1.1"
+  languageName: unknown
+  linkType: soft
+
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5"
@@ -1882,17 +1893,6 @@ __metadata:
   checksum: cb811d9d54eb5821b81b18205750be84cb015c20a4a44280794e915f5a0a70223ce39066781a354e872df3572e8155c228f43ff0cce94c7cbf4da2cc7cbdd635
   languageName: node
   linkType: hard
-
-"vectrace@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "vectrace@workspace:."
-  dependencies:
-    "@napi-rs/cli": "npm:^2.17.0"
-    "@napi-rs/image": "npm:^1.7.0"
-    "@types/node": "npm:^20.10.4"
-    ava: "npm:^5.1.1"
-  languageName: unknown
-  linkType: soft
 
 "well-known-symbols@npm:^2.0.0":
   version: 2.0.0

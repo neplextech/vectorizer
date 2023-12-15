@@ -1,5 +1,5 @@
 {
-  "name": "vectrace-win32-x64-msvc",
+  "name": "@neplex/vectorizer-win32-x64-msvc",
   "version": "0.0.0",
   "os": [
     "win32"
@@ -7,12 +7,18 @@
   "cpu": [
     "x64"
   ],
-  "main": "vectrace.win32-x64-msvc.node",
+  "main": "vectorizer.win32-x64-msvc.node",
   "files": [
-    "vectrace.win32-x64-msvc.node"
+    "vectorizer.win32-x64-msvc.node"
   ],
+  "description": "A simple Node.js library to convert raster images into svg",
+  "author": "twlite <hello@twlite.dev>",
   "license": "MIT",
   "engines": {
     "node": ">= 10"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/neplextech/vectrace"
   }
 }
