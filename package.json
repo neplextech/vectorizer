@@ -27,7 +27,7 @@
   "author": "twlite <hello@twlite.dev>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/neplextech/vectrace"
+    "url": "https://github.com/neplextech/vectorizer"
   },
   "devDependencies": {
     "@napi-rs/cli": "^2.17.0",
