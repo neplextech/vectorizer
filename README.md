@@ -20,9 +20,8 @@ import {
 import { readFile, writeFile } from 'node:fs/promises';
 
 const src = await readFile('./raster.png');
-const pixels = await new Transformer(src).rawPixels();
 
-const svg = await vectorize(pixels, {
+const svg = await vectorize(src, {
   colorMode: ColorMode.Color,
   colorPrecision: 6,
   filterSpeckle: 4,
