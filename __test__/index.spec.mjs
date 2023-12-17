@@ -1,8 +1,9 @@
 import test from 'ava'
 import { writeFile, readFile } from 'node:fs/promises'
-import { Transformer } from '@napi-rs/image'
-import { ColorMode, vectorize, PathSimplifyMode, Hierarchical } from '../index.js'
+import { ColorMode, vectorize, PathSimplifyMode, Hierarchical, Preset, vectorizeRaw } from '../index.js'
+import { Transformer } from '@napi-rs/image';
 
+const src = await readFile('./__test__/data/firefox-logo.png');
 const config = {
   colorMode: ColorMode.Color,
   colorPrecision: 6,
@@ -23,27 +24,60 @@ const configFirefox = {
   filterSpeckle: 14,
   colorPrecision: 8,
   mode: PathSimplifyMode.Polygon,
-  width: 432,
-  height: 420,
   layerDifference: 0
 };
 
 test('should vectorize image (simple)', async (t) => {
   const src = await readFile('./__test__/data/sample.png');
-  const pixels = new Transformer(src);
-  const result = await vectorize(await pixels.rawPixels(), configCircle);
+  const result = await vectorize(src, configCircle);
 
   await writeFile('./__test__/data/result.svg', result);
 
   t.pass();
 })
 
-test('should vectorize image (hard)', async (t) => {
-  const src = await readFile('./__test__/data/firefox-logo.png');
-  const pixels = new Transformer(src);
-  const result = await vectorize(await pixels.rawPixels(), configFirefox);
+test('should vectorize raw pixels data', async (t) => {
+  const src = await readFile('./__test__/data/sample.png');
+  const raw = await new Transformer(src).rawPixels();
+  const result = await vectorizeRaw(raw, configCircle, {
+    height: 100,
+    width: 100,
+  });
+
+  await writeFile('./__test__/data/result-raw.svg', result);
+
+  t.pass();
+})
+
+test('should vectorize image', async (t) => {
+
+  const result = await vectorize(src, configFirefox);
 
   await writeFile('./__test__/data/result-firefox.svg', result);
+
+  t.pass();
+})
+
+test('should vectorize image with preset bw', async (t) => {
+  const result = await vectorize(src, Preset.Bw)
+
+  await writeFile('./__test__/data/result-bw.svg', result);
+
+  t.pass();
+})
+
+test('should vectorize image with preset Photo', async (t) => {
+  const result = await vectorize(src, Preset.Photo)
+
+  await writeFile('./__test__/data/result-photo.svg', result);
+
+  t.pass();
+})
+
+test('should vectorize image with preset Poster', async (t) => {
+  const result = await vectorize(src, Preset.Poster)
+
+  await writeFile('./__test__/data/result-poster.svg', result);
 
   t.pass();
 })

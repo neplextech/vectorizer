@@ -17,15 +17,12 @@ import {
   Hierarchial,
   PathSimplifyMode,
 } from '@neplex/vectorizer';
-import { Transformer } from '@napi-rs/image';
 import { readFile, writeFile } from 'node:fs/promises';
 
 const src = await readFile('./raster.png');
 const pixels = await new Transformer(src).rawPixels();
 
 const svg = await vectorize(pixels, {
-  width: IMAGE_WIDTH,
-  height: IMAGE_HEIGHT,
   colorMode: ColorMode.Color,
   colorPrecision: 6,
   filterSpeckle: 4,
@@ -45,6 +42,24 @@ await writeFile('./vector.svg', svg);
 
 If you want to use synchronous API, you can use `vectorizeSync` instead.
 
+## API
+
+### `vectorize(data: Buffer, config?: Config | Preset): Promise<string>`
+
+Takes an image buffer and returns a promise that resolves to an SVG string.
+
+### `vectorizeSync(data: Buffer, config?: Config | Preset): string`
+
+Takes an image buffer and returns an SVG string synchronously.
+
+### `vectorizeRaw(data: Buffer, args: RawDataConfig, config?: Config | Preset): Promise<string>`
+
+Takes a raw pixel data buffer and returns a promise that resolves to an SVG string.
+
+### `vectorizeRawSync(data: Buffer, args: RawDataConfig, config?: Config | Preset): string`
+
+Takes a raw pixel data buffer and returns an SVG string synchronously.
+
 ## Demo
 
 Generated under the following configuration:
@@ -60,9 +75,7 @@ Generated under the following configuration:
     mode: PathSimplifyMode.Spline,
     layerDifference: 6,
     lengthThreshold: 4,
-    maxIterations: 2,
-    width: 1052,
-    height: 774
+    maxIterations: 2
 }
 ```
 

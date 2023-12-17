@@ -281,11 +281,13 @@ if (!nativeBinding) {
   throw new Error(`Failed to load native binding`)
 }
 
-const { ColorMode, Hierarchical, PathSimplifyMode, Preset, vectorize, vectorizeSync } = nativeBinding
+const { Preset, ColorMode, Hierarchical, PathSimplifyMode, vectorize, vectorizeRaw, vectorizeSync, vectorizeRawSync } = nativeBinding
 
+module.exports.Preset = Preset
 module.exports.ColorMode = ColorMode
 module.exports.Hierarchical = Hierarchical
 module.exports.PathSimplifyMode = PathSimplifyMode
-module.exports.Preset = Preset
 module.exports.vectorize = vectorize
+module.exports.vectorizeRaw = vectorizeRaw
 module.exports.vectorizeSync = vectorizeSync
+module.exports.vectorizeRawSync = vectorizeRawSync

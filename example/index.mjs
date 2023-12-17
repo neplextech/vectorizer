@@ -1,10 +1,7 @@
-import { Transformer } from '@napi-rs/image'
-import { vectorize, ColorMode, Hierarchical, PathSimplifyMode } from '../index.js'
-import { readFile, writeFile } from 'node:fs/promises'
+import { vectorize, ColorMode, Hierarchical, PathSimplifyMode } from '../index.js';
+import { readFile, writeFile } from 'node:fs/promises';
 
-const WIDTH = 1052, HEIGHT = 744;
 const src = await readFile('./example/anime-girl.png');
-const pixels = await new Transformer(src).rawPixels();
 
 const config = {
     colorMode: ColorMode.Color,
@@ -17,10 +14,8 @@ const config = {
     layerDifference: 6,
     lengthThreshold: 4,
     maxIterations: 2,
-    width: WIDTH,
-    height: HEIGHT
 };
 
-const result = await vectorize(pixels, config);
+const result = await vectorize(src, config);
 
 await writeFile('./example/result.svg', result);
