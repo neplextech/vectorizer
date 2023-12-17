@@ -39,10 +39,10 @@ test('should vectorize image (simple)', async (t) => {
 test('should vectorize raw pixels data', async (t) => {
   const src = await readFile('./__test__/data/sample.png');
   const raw = await new Transformer(src).rawPixels();
-  const result = await vectorizeRaw(raw, configCircle, {
+  const result = await vectorizeRaw(raw, {
     height: 100,
     width: 100,
-  });
+  }, configCircle);
 
   await writeFile('./__test__/data/result-raw.svg', result);
 
