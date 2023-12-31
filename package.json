@@ -1,6 +1,6 @@
 {
   "name": "@neplex/vectorizer",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A simple Node.js library to convert raster images into svg",
   "main": "index.js",
   "types": "index.d.ts",

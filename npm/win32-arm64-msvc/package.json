@@ -1,6 +1,6 @@
 {
   "name": "@neplex/vectorizer-win32-arm64-msvc",
-  "version": "0.0.0",
+  "version": "0.0.4",
   "os": [
     "win32"
   ],

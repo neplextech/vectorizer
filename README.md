@@ -1,6 +1,6 @@
 # @neplex/vectorizer
 
-A simple Node.js library to convert raster images into svg using [VTracer](https://github.com/visioncortex/vtracer).
+A simple Node.js library to convert raster images into svg using [VTracer](https://github.com/visioncortex/vtracer), with time complexity of `O(n)`.
 
 ## Installation
 

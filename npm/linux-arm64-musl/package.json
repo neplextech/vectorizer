@@ -1,6 +1,6 @@
 {
   "name": "@neplex/vectorizer-linux-arm64-musl",
-  "version": "0.0.0",
+  "version": "0.0.4",
   "os": [
     "linux"
   ],

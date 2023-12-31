@@ -16,6 +16,10 @@ const config = {
     maxIterations: 2,
 };
 
+const begin = performance.now();
 const result = await vectorize(src, config);
+const end = performance.now();
+
+console.log(`[Anime Girl Vectorization] Time: ${(end - begin).toFixed(2)}ms`);
 
 await writeFile('./example/result.svg', result);

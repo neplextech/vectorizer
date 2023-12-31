@@ -26,16 +26,27 @@ pub enum JsPathSimplifyMode {
 #[derive(Clone)]
 #[napi(object, js_name = "Config")]
 pub struct JsConfig {
+  /// True color image or binary image (black and white)
   pub color_mode: ColorMode,
+  /// Hierarchial clustering or non-stacked. Only applicable to color images.
   pub hierarchical: Hierarchical,
+  /// Discard patches smaller than X pixels in size (cleaner)
   pub filter_speckle: i32,
+  /// The number of significant bits to use in an RGB channel (more accurate)
   pub color_precision: i32,
+  /// The color difference between gradient layers (less layers)
   pub layer_difference: i32,
+  /// Curve fitting mode
   pub mode: JsPathSimplifyMode,
+  /// Minimum momentary angle (degree) to be considered a corner (smoother)
   pub corner_threshold: i32,
+  /// Perform iterative subdivide smooth until all segments are shorter than this length
   pub length_threshold: f64,
+  /// The maximum number of iterations to perform
   pub max_iterations: i32,
+  /// Minimum angle displacement (degree) to splice a spline (less accurate)
   pub splice_threshold: i32,
+  /// Number of decimal places to use in path string
   pub path_precision: Option<u32>,
 }
 
@@ -106,10 +117,6 @@ pub fn vectorize_raw_sync(
   vectorize_inner(source.as_ref(), config, Some(args))
 }
 
-fn create_config_with_preset(preset: Preset) -> Config {
-  Config::from_preset(preset)
-}
-
 fn vectorize_inner(
   source: &[u8],
   config: Option<Either<JsConfig, Preset>>,
@@ -163,7 +170,7 @@ fn resolve_config(config: Option<Either<JsConfig, Preset>>) -> Config {
       splice_threshold: config.splice_threshold,
       path_precision: config.path_precision,
     },
-    Some(Either::B(preset)) => create_config_with_preset(preset),
+    Some(Either::B(preset)) => Config::from_preset(preset),
     None => Config::default(),
   }
 }

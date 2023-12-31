@@ -22,16 +22,27 @@ export const enum PathSimplifyMode {
   Spline = 2
 }
 export interface Config {
+  /** True color image or binary image (black and white) */
   colorMode: ColorMode
+  /** Hierarchial clustering or non-stacked. Only applicable to color images. */
   hierarchical: Hierarchical
+  /** Discard patches smaller than X pixels in size (cleaner) */
   filterSpeckle: number
+  /** The number of significant bits to use in an RGB channel (more accurate) */
   colorPrecision: number
+  /** The color difference between gradient layers (less layers) */
   layerDifference: number
+  /** Curve fitting mode */
   mode: PathSimplifyMode
+  /** Minimum momentary angle (degree) to be considered a corner (smoother) */
   cornerThreshold: number
+  /** Perform iterative subdivide smooth until all segments are shorter than this length */
   lengthThreshold: number
+  /** The maximum number of iterations to perform */
   maxIterations: number
+  /** Minimum angle displacement (degree) to splice a spline (less accurate) */
   spliceThreshold: number
+  /** Number of decimal places to use in path string */
   pathPrecision?: number
 }
 export interface RawDataConfig {
