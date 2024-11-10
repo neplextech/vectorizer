@@ -14,7 +14,7 @@ npm install @neplex/vectorizer
 import {
   vectorize,
   ColorMode,
-  Hierarchial,
+  Hierarchical,
   PathSimplifyMode,
 } from '@neplex/vectorizer';
 import { readFile, writeFile } from 'node:fs/promises';
