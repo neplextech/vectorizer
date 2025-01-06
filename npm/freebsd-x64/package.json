@@ -1,0 +1,28 @@
+{
+  "name": "@neplex/vectorizer-freebsd-x64",
+  "version": "0.0.4",
+  "os": [
+    "freebsd"
+  ],
+  "cpu": [
+    "x64"
+  ],
+  "main": "vectorizer.freebsd-x64.node",
+  "files": [
+    "vectorizer.freebsd-x64.node"
+  ],
+  "description": "Node.js library to convert raster images to svg",
+  "author": "twlite <hello@twlite.dev>",
+  "license": "MIT",
+  "engines": {
+    "node": ">= 10"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/neplextech/vectorizer"
+  }
+}

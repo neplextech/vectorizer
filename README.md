@@ -1,6 +1,35 @@
 # @neplex/vectorizer
 
-A simple Node.js library to convert raster images into svg using [VTracer](https://github.com/visioncortex/vtracer), with time complexity of `O(n)`.
+Node.js library to convert raster images to svg using [VTracer](https://github.com/visioncortex/vtracer), with time complexity of `O(n)`.
+
+## Benchmark
+
+```js
+clk: ~5.11 GHz
+cpu: Intel(R) Core(TM) i7-14700K
+runtime: node 22.12.0 (x64-win32)
+
+benchmark                   avg (min … max) p75   p99    (min … top 1%)
+------------------------------------------- -------------------------------
+@neplex/vectorizer           543.89 µs/iter 542.50 µs  ▆█
+                    (517.20 µs … 778.50 µs) 719.00 µs ▃██▅▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁
+imagetracerjs                  2.54 ms/iter   2.61 ms  ▃█▃▂▄
+                        (2.38 ms … 4.09 ms)   2.93 ms ██████████▄▅▄▅▂▂▁▁▁▂▁
+
+summary
+  @neplex/vectorizer
+   4.67x faster than imagetracerjs
+```
+
+See [benchmark](https://github.com/neplextech/vectorizer/blob/main/benchmark/bench.ts) for more details.
+
+## CLI
+
+```bash
+npx @neplex/vectorizer ./raster.png ./vector.svg
+```
+
+Use `--help` to see all available options.
 
 ## Installation
 
@@ -11,12 +40,7 @@ npm install @neplex/vectorizer
 ## Usage
 
 ```js
-import {
-  vectorize,
-  ColorMode,
-  Hierarchical,
-  PathSimplifyMode,
-} from '@neplex/vectorizer';
+import { vectorize, ColorMode, Hierarchical, PathSimplifyMode } from '@neplex/vectorizer';
 import { readFile, writeFile } from 'node:fs/promises';
 
 const src = await readFile('./raster.png');
@@ -39,7 +63,7 @@ console.log(svg); // <svg>...</svg>
 await writeFile('./vector.svg', svg);
 ```
 
-If you want to use synchronous API, you can use `vectorizeSync` instead.
+If you want to use a synchronous API, you can use `vectorizeSync` instead.
 
 ## API
 

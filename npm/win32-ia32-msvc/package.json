@@ -11,11 +11,15 @@
   "files": [
     "vectorizer.win32-ia32-msvc.node"
   ],
-  "description": "A simple Node.js library to convert raster images into svg",
+  "description": "Node.js library to convert raster images to svg",
   "author": "twlite <hello@twlite.dev>",
   "license": "MIT",
   "engines": {
     "node": ">= 10"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   },
   "repository": {
     "type": "git",

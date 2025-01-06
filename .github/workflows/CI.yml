@@ -1,8 +1,9 @@
 name: CI
 env:
   DEBUG: napi:*
-  APP_NAME: vectorizer
+  APP_NAME: package-template
   MACOSX_DEPLOYMENT_TARGET: '10.13'
+  CARGO_INCREMENTAL: '1'
 permissions:
   contents: write
   id-token: write
@@ -19,6 +20,9 @@ permissions:
       - .editorconfig
       - docs/**
   pull_request: null
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   build:
     strategy:
@@ -27,40 +31,28 @@ jobs:
         settings:
           - host: macos-latest
             target: x86_64-apple-darwin
-            build: |
-              yarn build
-              strip -x *.node
+            build: yarn build --target x86_64-apple-darwin
           - host: windows-latest
-            build: yarn build
+            build: yarn build --target x86_64-pc-windows-msvc
             target: x86_64-pc-windows-msvc
           - host: windows-latest
-            build: |
-              yarn build --target i686-pc-windows-msvc
-              yarn test
+            build: yarn build --target i686-pc-windows-msvc
             target: i686-pc-windows-msvc
           - host: ubuntu-latest
             target: x86_64-unknown-linux-gnu
             docker: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-debian
-            build: |-
-              set -e &&
-              yarn build --target x86_64-unknown-linux-gnu &&
-              strip *.node
+            build: yarn build --target x86_64-unknown-linux-gnu
           - host: ubuntu-latest
             target: x86_64-unknown-linux-musl
             docker: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-alpine
-            build: set -e && yarn build && strip *.node
+            build: yarn build --target x86_64-unknown-linux-musl
           - host: macos-latest
             target: aarch64-apple-darwin
-            build: |
-              yarn build --target aarch64-apple-darwin
-              strip -x *.node
+            build: yarn build --target aarch64-apple-darwin
           - host: ubuntu-latest
             target: aarch64-unknown-linux-gnu
             docker: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-debian-aarch64
-            build: |-
-              set -e &&
-              yarn build --target aarch64-unknown-linux-gnu &&
-              aarch64-unknown-linux-gnu-strip *.node
+            build: yarn build --target aarch64-unknown-linux-gnu
           - host: ubuntu-latest
             target: armv7-unknown-linux-gnueabihf
             setup: |
@@ -68,36 +60,22 @@ jobs:
               sudo apt-get install gcc-arm-linux-gnueabihf -y
             build: |
               yarn build --target armv7-unknown-linux-gnueabihf
-              arm-linux-gnueabihf-strip *.node
           - host: ubuntu-latest
             target: aarch64-linux-android
-            build: |
-              yarn build --target aarch64-linux-android
-              ${ANDROID_NDK_LATEST_HOME}/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip *.node
+            build: yarn build --target aarch64-linux-android
           - host: ubuntu-latest
             target: armv7-linux-androideabi
-            build: |
-              yarn build --target armv7-linux-androideabi
-              ${ANDROID_NDK_LATEST_HOME}/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip *.node
+            build: yarn build --target armv7-linux-androideabi
           - host: ubuntu-latest
             target: aarch64-unknown-linux-musl
             docker: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-alpine
             build: |-
               set -e &&
               rustup target add aarch64-unknown-linux-musl &&
-              yarn build --target aarch64-unknown-linux-musl &&
-              /aarch64-linux-musl-cross/bin/aarch64-linux-musl-strip *.node
+              yarn build --target aarch64-unknown-linux-musl
           - host: windows-latest
             target: aarch64-pc-windows-msvc
             build: yarn build --target aarch64-pc-windows-msvc
-          - host: ubuntu-latest
-            target: riscv64gc-unknown-linux-gnu
-            setup: |
-              sudo apt-get update
-              sudo apt-get install gcc-riscv64-linux-gnu -y
-            build: |
-              yarn build --target riscv64gc-unknown-linux-gnu
-              riscv64-linux-gnu-strip *.node
     name: stable - ${{ matrix.settings.target }} - node@18
     runs-on: ${{ matrix.settings.host }}
     steps:
@@ -106,7 +84,7 @@ jobs:
         uses: actions/setup-node@v4
         if: ${{ !matrix.settings.docker }}
         with:
-          node-version: 18
+          node-version: 20
           cache: yarn
       - name: Install
         uses: dtolnay/rust-toolchain@stable
@@ -115,7 +93,7 @@ jobs:
           toolchain: stable
           targets: ${{ matrix.settings.target }}
       - name: Cache cargo
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ~/.cargo/registry/index/
@@ -127,24 +105,13 @@ jobs:
       - uses: goto-bus-stop/setup-zig@v2
         if: ${{ matrix.settings.target == 'armv7-unknown-linux-gnueabihf' }}
         with:
-          version: 0.11.0
+          version: 0.13.0
       - name: Setup toolchain
         run: ${{ matrix.settings.setup }}
         if: ${{ matrix.settings.setup }}
         shell: bash
-      - name: Setup node x86
-        if: matrix.settings.target == 'i686-pc-windows-msvc'
-        run: yarn config set supportedArchitectures.cpu "ia32"
-        shell: bash
       - name: Install dependencies
         run: yarn install
-      - name: Setup node x86
-        uses: actions/setup-node@v4
-        if: matrix.settings.target == 'i686-pc-windows-msvc'
-        with:
-          node-version: 18
-          cache: yarn
-          architecture: x86
       - name: Build in docker
         uses: addnab/docker-run-action@v3
         if: ${{ matrix.settings.docker }}
@@ -157,9 +124,55 @@ jobs:
         if: ${{ !matrix.settings.docker }}
         shell: bash
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: bindings-${{ matrix.settings.target }}
+          path: ${{ env.APP_NAME }}.*.node
+          if-no-files-found: error
+  build-freebsd:
+    runs-on: ubuntu-latest
+    name: Build FreeBSD
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        id: build
+        uses: cross-platform-actions/action@v0.26.0
+        env:
+          DEBUG: napi:*
+          RUSTUP_IO_THREADS: 1
+        with:
+          operating_system: freebsd
+          version: '14.2'
+          memory: 8G
+          cpu_count: 3
+          environment_variables: 'DEBUG RUSTUP_IO_THREADS'
+          shell: bash
+          run: |
+            sudo pkg install -y -f curl node libnghttp2 npm
+            sudo npm install -g yarn --ignore-scripts
+            curl https://sh.rustup.rs -sSf --output rustup.sh
+            sh rustup.sh -y --profile minimal --default-toolchain beta
+            source "$HOME/.cargo/env"
+            echo "~~~~ rustc --version ~~~~"
+            rustc --version
+            echo "~~~~ node -v ~~~~"
+            node -v
+            echo "~~~~ yarn --version ~~~~"
+            yarn --version
+            pwd
+            ls -lah
+            whoami
+            env
+            freebsd-version
+            yarn install
+            yarn build
+            rm -rf node_modules
+            rm -rf target
+            rm -rf .yarn/cache
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: bindings-freebsd
           path: ${{ env.APP_NAME }}.*.node
           if-no-files-found: error
   test-macOS-windows-binding:
@@ -170,10 +183,15 @@ jobs:
       fail-fast: false
       matrix:
         settings:
-          - host: macos-latest
-            target: x86_64-apple-darwin
           - host: windows-latest
             target: x86_64-pc-windows-msvc
+            architecture: x64
+          - host: macos-latest
+            target: aarch64-apple-darwin
+            architecture: arm64
+          - host: macos-latest
+            target: x86_64-apple-darwin
+            architecture: x64
         node:
           - '18'
           - '20'
@@ -185,10 +203,11 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
           cache: yarn
+          architecture: ${{ matrix.settings.architecture }}
       - name: Install dependencies
         run: yarn install
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: bindings-${{ matrix.settings.target }}
           path: .
@@ -218,7 +237,7 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: bindings-x86_64-unknown-linux-gnu
           path: .
@@ -250,7 +269,7 @@ jobs:
           yarn config set supportedArchitectures.libc "musl"
           yarn install
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: bindings-x86_64-unknown-linux-musl
           path: .
@@ -273,7 +292,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: bindings-aarch64-unknown-linux-gnu
           path: .
@@ -300,14 +319,14 @@ jobs:
             yarn test
             ls -la
   test-linux-aarch64-musl-binding:
-    name: Test bindings on aarch64-unknown-linux-musl - node@${{ matrix.node }}
+    name: Test bindings on aarch64-unknown-linux-musl - node@lts
     needs:
       - build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: bindings-aarch64-unknown-linux-musl
           path: .
@@ -346,7 +365,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: bindings-armv7-unknown-linux-gnueabihf
           path: .
@@ -371,61 +390,28 @@ jobs:
             set -e
             yarn test
             ls -la
-  universal-macOS:
-    name: Build universal macOS binary
-    needs:
-      - build
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Setup node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-          cache: yarn
-      - name: Install dependencies
-        run: yarn install
-      - name: Download macOS x64 artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: bindings-x86_64-apple-darwin
-          path: artifacts
-      - name: Download macOS arm64 artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: bindings-aarch64-apple-darwin
-          path: artifacts
-      - name: Combine binaries
-        run: yarn universal
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: bindings-universal-apple-darwin
-          path: ${{ env.APP_NAME }}.*.node
-          if-no-files-found: error
   publish:
     name: Publish
     runs-on: ubuntu-latest
     needs:
-      # - build-freebsd
+      - build-freebsd
       - test-macOS-windows-binding
       - test-linux-x64-gnu-binding
       - test-linux-x64-musl-binding
       - test-linux-aarch64-gnu-binding
       - test-linux-aarch64-musl-binding
       - test-linux-arm-gnueabihf-binding
-      - universal-macOS
     steps:
       - uses: actions/checkout@v4
       - name: Setup node
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
           cache: yarn
       - name: Install dependencies
         run: yarn install
       - name: Download all artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           path: artifacts
       - name: Move artifacts

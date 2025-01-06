@@ -6,50 +6,58 @@
 export const enum Preset {
   Bw = 0,
   Poster = 1,
-  Photo = 2
+  Photo = 2,
 }
 export const enum ColorMode {
   Color = 0,
-  Binary = 1
+  Binary = 1,
 }
 export const enum Hierarchical {
   Stacked = 0,
-  Cutout = 1
+  Cutout = 1,
 }
 export const enum PathSimplifyMode {
   None = 0,
   Polygon = 1,
-  Spline = 2
+  Spline = 2,
 }
 export interface Config {
   /** True color image or binary image (black and white) */
-  colorMode: ColorMode
+  colorMode: ColorMode;
   /** Hierarchial clustering or non-stacked. Only applicable to color images. */
-  hierarchical: Hierarchical
+  hierarchical: Hierarchical;
   /** Discard patches smaller than X pixels in size (cleaner) */
-  filterSpeckle: number
+  filterSpeckle: number;
   /** The number of significant bits to use in an RGB channel (more accurate) */
-  colorPrecision: number
+  colorPrecision: number;
   /** The color difference between gradient layers (less layers) */
-  layerDifference: number
+  layerDifference: number;
   /** Curve fitting mode */
-  mode: PathSimplifyMode
+  mode: PathSimplifyMode;
   /** Minimum momentary angle (degree) to be considered a corner (smoother) */
-  cornerThreshold: number
+  cornerThreshold: number;
   /** Perform iterative subdivide smooth until all segments are shorter than this length */
-  lengthThreshold: number
+  lengthThreshold: number;
   /** The maximum number of iterations to perform */
-  maxIterations: number
+  maxIterations: number;
   /** Minimum angle displacement (degree) to splice a spline (less accurate) */
-  spliceThreshold: number
+  spliceThreshold: number;
   /** Number of decimal places to use in path string */
-  pathPrecision?: number
+  pathPrecision?: number;
 }
 export interface RawDataConfig {
-  width: number
-  height: number
+  width: number;
+  height: number;
 }
-export function vectorize(source: Buffer, config?: Config | Preset | undefined | null): Promise<string>
-export function vectorizeRaw(source: Buffer, args: RawDataConfig, config?: Config | Preset | undefined | null): Promise<string>
-export function vectorizeSync(source: Buffer, config?: Config | Preset | undefined | null): string
-export function vectorizeRawSync(source: Buffer, args: RawDataConfig, config?: Config | Preset | undefined | null): string
+export declare function vectorize(source: Buffer, config?: Config | Preset | undefined | null): Promise<string>;
+export declare function vectorizeRaw(
+  source: Buffer,
+  args: RawDataConfig,
+  config?: Config | Preset | undefined | null,
+): Promise<string>;
+export declare function vectorizeSync(source: Buffer, config?: Config | Preset | undefined | null): string;
+export declare function vectorizeRawSync(
+  source: Buffer,
+  args: RawDataConfig,
+  config?: Config | Preset | undefined | null,
+): string;

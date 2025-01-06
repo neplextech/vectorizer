@@ -1,21 +1,21 @@
 [package]
+authors = ["Twilight <hello@twlite.dev>"]
 edition = "2021"
-name = "vectrace"
+name    = "vectrace"
 version = "0.0.0"
 
 [lib]
 crate-type = ["cdylib"]
 
 [dependencies]
-# Default enable napi4 feature, see https://nodejs.org/api/n-api.html#node-api-version-matrix
-napi = { version = "2.12.2", default-features = false, features = ["napi4"] }
-napi-derive = "2.12.2"
-visioncortex = "0.8.6"
-fastrand = "1.8"
-image = "0.24.7"
+fastrand     = "2"
+image        = "0.25.5"
+napi         = "2"
+napi-derive  = "2"
+visioncortex = "0.8.8"
 
 [build-dependencies]
-napi-build = "2.0.1"
+napi-build = "2"
 
 [profile.release]
 lto = true

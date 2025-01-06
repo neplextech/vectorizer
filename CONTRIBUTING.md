@@ -32,6 +32,7 @@ The commit message should be structured as follows:
 4. Others: commit types other than `fix:` and `feat:` are allowed, for example [@commitlint/config-conventional](https://npm.im/@commitlint/config-conventional) (based on the [Angular convention](https://github.com/angular/angular/blob/68a6a07/CONTRIBUTING.md#commit)) recommends `chore:`, `docs:`, `style:`, `refactor:`, `perf:`, `test:`, and others.
 
 ### Examples
+
 #### Commit message with description and breaking change in body
 
 ```text
