@@ -70,10 +70,15 @@
     "husky": "^9.0.11",
     "imagetracerjs": "^1.2.6",
     "lint-staged": "^15.2.7",
+    "mitata": "^1.0.26",
     "npm-run-all2": "^7.0.0",
     "oxlint": "^0.15.0",
     "prettier": "^3.3.3",
     "typescript": "^5.5.3"
+  },
+  "dependencies": {
+    "commander": "^13.0.0",
+    "picocolors": "^1.1.1"
   },
   "packageManager": "yarn@4.6.0",
   "ava": {
@@ -107,10 +112,5 @@
     "*.toml": [
       "taplo format"
     ]
-  },
-  "dependencies": {
-    "commander": "^13.0.0",
-    "mitata": "^1.0.26",
-    "picocolors": "^1.1.1"
   }
 }
