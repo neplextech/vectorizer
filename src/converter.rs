@@ -183,7 +183,7 @@ fn color_image_to_svg(mut img: ColorImage, config: ConverterConfig) -> Result<Sv
           hierarchical: 64,
           batch_size: 25600,
           good_min_area: 0,
-          good_max_area: (image.width * image.height) as usize,
+          good_max_area: (image.width * image.height),
           is_same_color_a: 0,
           is_same_color_b: 1,
           deepen_diff: 0,
