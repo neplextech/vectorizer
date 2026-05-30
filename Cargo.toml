@@ -1,21 +1,23 @@
+
 [package]
 authors = ["Twilight <hello@twlite.dev>"]
 edition = "2021"
 name    = "vectrace"
-version = "0.0.0"
+version = "0.1.0"
 
 [lib]
 crate-type = ["cdylib"]
 
 [dependencies]
-fastrand     = "2"
-image        = "0.25.5"
-napi         = "2"
-napi-derive  = "2"
-visioncortex = "0.8.8"
+fastrand     = "2.4.1"
+image        = "0.25.10"
+napi         = "3.0.0"
+napi-derive  = "3.0.0"
+visioncortex = "0.8.10"
 
 [build-dependencies]
 napi-build = "2"
 
 [profile.release]
-lto = true
+lto   = true
+strip = "symbols"

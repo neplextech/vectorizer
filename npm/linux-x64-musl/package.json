@@ -1,9 +1,6 @@
 {
   "name": "@neplex/vectorizer-linux-x64-musl",
-  "version": "0.0.4",
-  "os": [
-    "linux"
-  ],
+  "version": "0.1.0",
   "cpu": [
     "x64"
   ],
@@ -12,19 +9,31 @@
     "vectorizer.linux-x64-musl.node"
   ],
   "description": "Node.js library to convert raster images to svg",
-  "author": "twlite <hello@twlite.dev>",
+  "keywords": [
+    "vectorizer",
+    "raster-to-svg",
+    "image-tracing",
+    "svg-optimization",
+    "nodejs",
+    "rust",
+    "napi"
+  ],
+  "author": "Twilight <hello@twlite.dev>",
   "license": "MIT",
   "engines": {
-    "node": ">= 10"
-  },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
-    "access": "public"
+    "node": ">= 12.22.0 < 13 || >= 14.17.0 < 15 || >= 15.12.0 < 16 || >= 16.0.0"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/neplextech/vectorizer"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "os": [
+    "linux"
+  ],
   "libc": [
     "musl"
   ]

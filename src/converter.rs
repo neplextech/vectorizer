@@ -11,11 +11,14 @@ use visioncortex::{
   approximate_circle_with_spline, Color, ColorImage, ColorName, CompoundPath, PathSimplifyMode,
 };
 
+#[allow(dead_code)]
 const NUM_UNUSED_COLOR_ITERATIONS: usize = 6;
 /// The fraction of pixels in the top/bottom rows of the image that need to be transparent before
 /// the entire image will be keyed.
+#[allow(dead_code)]
 const KEYING_THRESHOLD: f32 = 0.2;
 
+#[allow(dead_code)]
 const SMALL_CIRCLE: i32 = 12;
 
 /// Convert an in-memory image into an in-memory SVG
@@ -39,19 +42,36 @@ pub fn convert_image_to_svg(
   Ok(str)
 }
 
-fn color_exists_in_image(img: &ColorImage, color: Color) -> bool {
-  for y in 0..img.height {
-    for x in 0..img.width {
-      let pixel_color = img.get_pixel(x, y);
-      if pixel_color.r == color.r && pixel_color.g == color.g && pixel_color.b == color.b {
-        return true;
-      }
-    }
-  }
-  false
+pub fn convert_image_to_svg_chunks<F>(
+  input: &[u8],
+  config: Config,
+  raw: Option<RawDataConfig>,
+  write: F,
+) -> Result<(), String>
+where
+  F: FnMut(String, f64) -> Result<(), String>,
+{
+  let img = read_image(input, raw)?;
+  let svg = convert(img, config)?;
+  svg.write_chunks(write)
 }
 
+fn color_exists_in_image(img: &ColorImage, color: Color) -> bool {
+  img
+    .pixels
+    .chunks_exact(4)
+    .any(|pixel| pixel[0] == color.r && pixel[1] == color.g && pixel[2] == color.b)
+}
+
+#[allow(dead_code)]
 fn find_unused_color_in_image(img: &ColorImage) -> Result<Color, String> {
+  find_unused_color_in_image_with_iterations(img, NUM_UNUSED_COLOR_ITERATIONS)
+}
+
+fn find_unused_color_in_image_with_iterations(
+  img: &ColorImage,
+  unused_color_iterations: usize,
+) -> Result<Color, String> {
   let special_colors = IntoIterator::into_iter([
     Color::new(255, 0, 0),
     Color::new(0, 255, 0),
@@ -62,7 +82,7 @@ fn find_unused_color_in_image(img: &ColorImage) -> Result<Color, String> {
   ]);
   let mut rng = Rng::new();
   let random_colors =
-    (0..NUM_UNUSED_COLOR_ITERATIONS).map(|_| Color::new(rng.u8(..), rng.u8(..), rng.u8(..)));
+    (0..unused_color_iterations).map(|_| Color::new(rng.u8(..), rng.u8(..), rng.u8(..)));
   for color in special_colors.chain(random_colors) {
     if !color_exists_in_image(img, color) {
       return Ok(color);
@@ -73,13 +93,18 @@ fn find_unused_color_in_image(img: &ColorImage) -> Result<Color, String> {
   ))
 }
 
+#[allow(dead_code)]
 fn should_key_image(img: &ColorImage) -> bool {
+  should_key_image_with_threshold(img, KEYING_THRESHOLD)
+}
+
+fn should_key_image_with_threshold(img: &ColorImage, keying_threshold: f32) -> bool {
   if img.width == 0 || img.height == 0 {
     return false;
   }
 
   // Check for transparency at several scanlines
-  let threshold = ((img.width * 2) as f32 * KEYING_THRESHOLD) as usize;
+  let threshold = ((img.width * 2) as f32 * keying_threshold) as usize;
   let mut num_transparent_boundary_pixels = 0;
   let y_positions = [
     0,
@@ -89,8 +114,10 @@ fn should_key_image(img: &ColorImage) -> bool {
     img.height - 1,
   ];
   for y in y_positions {
+    let row_start = y * img.width * 4;
     for x in 0..img.width {
-      if img.get_pixel(x, y).a == 0 {
+      let alpha_index = row_start + x * 4 + 3;
+      if img.pixels[alpha_index] == 0 {
         num_transparent_boundary_pixels += 1;
       }
       if num_transparent_boundary_pixels >= threshold {
@@ -106,8 +133,9 @@ fn color_image_to_svg(mut img: ColorImage, config: ConverterConfig) -> Result<Sv
   let width = img.width;
   let height = img.height;
 
-  let key_color = if should_key_image(&img) {
-    let key_color = find_unused_color_in_image(&img)?;
+  let key_color = if should_key_image_with_threshold(&img, config.keying_threshold) {
+    let key_color =
+      find_unused_color_in_image_with_iterations(&img, config.unused_color_iterations)?;
     for y in 0..height {
       for x in 0..width {
         if img.get_pixel(x, y).a == 0 {
@@ -175,8 +203,8 @@ fn color_image_to_svg(mut img: ColorImage, config: ConverterConfig) -> Result<Sv
   for &cluster_index in view.clusters_output.iter().rev() {
     let cluster = view.get_cluster(cluster_index);
     let paths = if matches!(config.mode, PathSimplifyMode::Spline)
-      && cluster.rect.width() < SMALL_CIRCLE
-      && cluster.rect.height() < SMALL_CIRCLE
+      && cluster.rect.width() < config.small_circle
+      && cluster.rect.height() < config.small_circle
       && cluster.to_shape(&view).is_circle()
     {
       let mut paths = CompoundPath::new();
@@ -230,10 +258,30 @@ fn binary_image_to_svg(img: ColorImage, config: ConverterConfig) -> Result<SvgFi
 fn read_image(input: &[u8], raw: Option<RawDataConfig>) -> Result<ColorImage, String> {
   match raw {
     Some(raw) => {
+      let width = raw.width as usize;
+      let height = raw.height as usize;
+
+      if width == 0 || height == 0 {
+        return Err(String::from("width and height must be positive"));
+      }
+
+      let expected_len = width
+        .checked_mul(height)
+        .and_then(|size| size.checked_mul(4))
+        .ok_or_else(|| String::from("Image dimensions are too large"))?;
+
+      if input.len() != expected_len {
+        return Err(format!(
+          "pixel data length {} does not match width * height * 4 {}",
+          input.len(),
+          expected_len
+        ));
+      }
+
       let img = ColorImage {
         pixels: input.to_vec(),
-        width: raw.width as usize,
-        height: raw.height as usize,
+        width,
+        height,
       };
       Ok(img)
     }
@@ -253,4 +301,22 @@ fn read_image(input: &[u8], raw: Option<RawDataConfig>) -> Result<ColorImage, St
       Ok(img)
     }
   }
+}
+
+pub(crate) fn js_read_image(
+  input: &[u8],
+  raw: Option<RawDataConfig>,
+) -> Result<ColorImage, String> {
+  read_image(input, raw)
+}
+
+pub(crate) fn js_color_exists_in_image(img: &ColorImage, color: Color) -> bool {
+  color_exists_in_image(img, color)
+}
+
+pub(crate) fn js_find_unused_color_in_image(
+  img: &ColorImage,
+  unused_color_iterations: usize,
+) -> Result<Color, String> {
+  find_unused_color_in_image_with_iterations(img, unused_color_iterations)
 }

@@ -1,5 +1,6 @@
-import { vectorize, ColorMode, Hierarchical, PathSimplifyMode } from '../index.js';
+import { ColorMode, Hierarchical, PathSimplifyMode, vectorizeToCallback, isEOF } from '../index.js';
 import { readFile, writeFile } from 'node:fs/promises';
+import { optimise } from '@oxvg/napi';
 
 const src = await readFile('./example/anime-girl.png');
 
@@ -16,10 +17,50 @@ const config = {
   maxIterations: 2,
 };
 
+const results: string[] = [];
 const begin = performance.now();
-const result = await vectorize(src, config);
-const end = performance.now();
+const { promise, resolve } = Promise.withResolvers<void>();
+const progressBarWidth = 24;
+let chunkCount = 0;
 
-console.log(`[Anime Girl Vectorization] Time: ${(end - begin).toFixed(2)}ms`);
+function renderProgressBar(progress: number, chunksPerMilliSecond: number) {
+  const filledLength = Math.round((progress / 100) * progressBarWidth);
+  const emptyLength = progressBarWidth - filledLength;
+  const bar = `${'#'.repeat(filledLength)}${'-'.repeat(emptyLength)}`;
+
+  process.stdout.write(
+    `\rProgress: [${bar}] ${progress.toFixed(2)}% | Speed: ${chunksPerMilliSecond.toFixed(2)} chunks/ms`,
+  );
+}
+
+await vectorizeToCallback(src, config, (chunk) => {
+  const [chunkData, progress] = chunk;
+  chunkCount += 1;
+  const elapsedMilliSeconds = Math.max(performance.now() - begin, 0.001);
+  const chunksPerMilliSecond = chunkCount / elapsedMilliSeconds;
+
+  renderProgressBar(progress, chunksPerMilliSecond);
+  results.push(chunkData);
+  if (isEOF(chunk)) {
+    process.stdout.write('\n');
+    resolve();
+  }
+});
+await promise;
+console.log(`Total chunks: ${chunkCount}`);
+const end = performance.now();
+const result = results.join('');
+
+console.log(`[Anime Girl Vectorization] Time: ${(end - begin).toFixed(2)}ms | Length: ${result.length}`);
 
 await writeFile('./example/result.svg', result);
+
+const optimizeBegin = performance.now();
+const optimized = optimise(result);
+const optimizeEnd = performance.now();
+
+console.log(
+  `[Anime Girl Optimization] Time: ${(optimizeEnd - optimizeBegin).toFixed(2)}ms | Length: ${optimized.length}`,
+);
+
+await writeFile('./example/result-optimized.svg', optimized);

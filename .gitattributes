@@ -1,13 +1,19 @@
 # Auto detect text files and perform LF normalization
-*        text=auto
+*        text=auto eol=lf
 
+*.ts    text eol=lf merge=union
+*.tsx   text eol=lf merge=union
+*.rs    text eol=lf merge=union
+*.js    text eol=lf merge=union
+*.json  text eol=lf merge=union
+*.debug text eol=lf merge=union
 
-*.ts    text eol=lf merge=union 
-*.tsx   text eol=lf merge=union 
-*.rs    text eol=lf merge=union 
-*.js    text eol=lf merge=union 
-*.json  text eol=lf merge=union 
-*.debug text eol=lf merge=union 
-
-*.js linguist-language=TypeScript
-*.mjs linguist-language=TypeScript
+# Generated codes
+index.js                         linguist-detectable=false
+index.d.ts                       linguist-detectable=false
+js-bindings.js                         linguist-detectable=false
+js-bindings.d.ts                       linguist-detectable=false
+vectorizer.wasi-browser.js linguist-detectable=false
+vectorizer.wasi.cjs        linguist-detectable=false
+wasi-worker-browser.mjs          linguist-detectable=false
+wasi-worker.mjs                  linguist-detectable=false
