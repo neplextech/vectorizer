@@ -1,6 +1,5 @@
 const { readFileSync, writeFileSync } = require('node:fs');
 
-const STREAM_EXPORTS = ['vectorizeStream', 'vectorizeRawStream'];
 const EXPORT_MARKER = '// Auto-generated exports by postbuild.js. Do not edit directly.';
 
 function collectNativeExportNames(jsBindings) {
@@ -21,10 +20,7 @@ function collectNativeExportNames(jsBindings) {
 
 function buildIndexJs(nativeExportNames) {
   const originalSource = readFileSync('./index.js', 'utf-8');
-  const exportStatements = nativeExportNames
-    .concat(STREAM_EXPORTS)
-    .map((name) => `module.exports.${name} = nativeBinding.${name}`)
-    .join('\n');
+  const exportStatements = nativeExportNames.map((name) => `module.exports.${name} = nativeBinding.${name}`).join('\n');
 
   return `${originalSource.split(EXPORT_MARKER)[0].trimEnd()}\n
 ${EXPORT_MARKER}

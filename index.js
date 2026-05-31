@@ -33,5 +33,3 @@ module.exports.vectorizeRawSync = nativeBinding.vectorizeRawSync
 module.exports.vectorizeRawToCallback = nativeBinding.vectorizeRawToCallback
 module.exports.vectorizeSync = nativeBinding.vectorizeSync
 module.exports.vectorizeToCallback = nativeBinding.vectorizeToCallback
-module.exports.vectorizeStream = nativeBinding.vectorizeStream
-module.exports.vectorizeRawStream = nativeBinding.vectorizeRawStream
