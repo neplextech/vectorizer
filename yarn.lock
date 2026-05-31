@@ -1512,7 +1512,6 @@ __metadata:
     "@napi-rs/image": "npm:^1.12.0"
     "@napi-rs/wasm-runtime": "npm:^1.1.4"
     "@oxc-node/core": "npm:^0.1.0"
-    "@oxvg/napi": "npm:^0.0.4"
     "@taplo/cli": "npm:^0.7.0"
     "@tybys/wasm-util": "npm:^0.10.0"
     "@types/node": "npm:^25.9.1"
@@ -1922,55 +1921,6 @@ __metadata:
   version: 1.14.0
   resolution: "@oxlint/win32-x64@npm:1.14.0"
   conditions: os=win32 & cpu=x64
-  languageName: node
-  linkType: hard
-
-"@oxvg/napi-darwin-arm64@npm:0.0.4":
-  version: 0.0.4
-  resolution: "@oxvg/napi-darwin-arm64@npm:0.0.4"
-  conditions: os=darwin & cpu=x64
-  languageName: node
-  linkType: hard
-
-"@oxvg/napi-darwin-x64@npm:0.0.4":
-  version: 0.0.4
-  resolution: "@oxvg/napi-darwin-x64@npm:0.0.4"
-  conditions: os=darwin & cpu=x64
-  languageName: node
-  linkType: hard
-
-"@oxvg/napi-linux-x64-gnu@npm:0.0.4":
-  version: 0.0.4
-  resolution: "@oxvg/napi-linux-x64-gnu@npm:0.0.4"
-  conditions: os=linux & cpu=x64 & libc=glibc
-  languageName: node
-  linkType: hard
-
-"@oxvg/napi-win32-x64-msvc@npm:0.0.4":
-  version: 0.0.4
-  resolution: "@oxvg/napi-win32-x64-msvc@npm:0.0.4"
-  conditions: os=win32 & cpu=x64
-  languageName: node
-  linkType: hard
-
-"@oxvg/napi@npm:^0.0.4":
-  version: 0.0.4
-  resolution: "@oxvg/napi@npm:0.0.4"
-  dependencies:
-    "@oxvg/napi-darwin-arm64": "npm:0.0.4"
-    "@oxvg/napi-darwin-x64": "npm:0.0.4"
-    "@oxvg/napi-linux-x64-gnu": "npm:0.0.4"
-    "@oxvg/napi-win32-x64-msvc": "npm:0.0.4"
-  dependenciesMeta:
-    "@oxvg/napi-darwin-arm64":
-      optional: true
-    "@oxvg/napi-darwin-x64":
-      optional: true
-    "@oxvg/napi-linux-x64-gnu":
-      optional: true
-    "@oxvg/napi-win32-x64-msvc":
-      optional: true
-  checksum: 10c0/93f0d1c78acdecfbb75dfa85591151c8c09d9fba2a8771896fc449be17dbcf0c937f4b38a8ab6d4641c1eff0793bc2e59c3221777b824829287329130366a505
   languageName: node
   linkType: hard
 

@@ -92,10 +92,4 @@ The key words `“MUST”`, `“MUST NOT”`, `“REQUIRED”`, `“SHALL”`, `
 
 Make sure to properly format the source code, check for linter errors and test the code before pushing.
 
-## File Names
-
-1. Use `PascalCase` format if the file belongs to a class. Ex: `NobuBrowser.ts`, `ProtocolService.ts`, etc.
-2. Use `camelCase` format for the files that belong to functions. Ex: `contextMenu`, `appMenu`, etc.
-3. Use `lowercase` format for other cases.
-
 > 🎉 Happy coding!

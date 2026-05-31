@@ -83,7 +83,6 @@
     "@napi-rs/image": "^1.12.0",
     "@napi-rs/wasm-runtime": "^1.1.4",
     "@oxc-node/core": "^0.1.0",
-    "@oxvg/napi": "^0.0.4",
     "@taplo/cli": "^0.7.0",
     "@tybys/wasm-util": "^0.10.0",
     "@types/node": "^25.9.1",

@@ -1,6 +1,5 @@
-import { ColorMode, Hierarchical, PathSimplifyMode, vectorizeToCallback, isEOF } from '../index.js';
+import { ColorMode, Hierarchical, PathSimplifyMode, vectorizeToCallback, isEOF, optimize } from '../index.js';
 import { readFile, writeFile } from 'node:fs/promises';
-import { optimise } from '@oxvg/napi';
 
 const src = await readFile('./example/anime-girl.png');
 
@@ -33,15 +32,14 @@ function renderProgressBar(progress: number, chunksPerMilliSecond: number) {
   );
 }
 
-await vectorizeToCallback(src, config, (chunk) => {
-  const [chunkData, progress] = chunk;
+vectorizeToCallback(src, config, (chunk, progress) => {
   chunkCount += 1;
   const elapsedMilliSeconds = Math.max(performance.now() - begin, 0.001);
   const chunksPerMilliSecond = chunkCount / elapsedMilliSeconds;
 
   renderProgressBar(progress, chunksPerMilliSecond);
-  results.push(chunkData);
-  if (isEOF(chunk)) {
+  results.push(chunk);
+  if (isEOF(chunk, progress)) {
     process.stdout.write('\n');
     resolve();
   }
@@ -56,7 +54,7 @@ console.log(`[Anime Girl Vectorization] Time: ${(end - begin).toFixed(2)}ms | Le
 await writeFile('./example/result.svg', result);
 
 const optimizeBegin = performance.now();
-const optimized = optimise(result);
+const optimized = await optimize(result);
 const optimizeEnd = performance.now();
 
 console.log(

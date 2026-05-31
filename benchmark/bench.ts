@@ -2,7 +2,15 @@ import { createRequire } from 'node:module';
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { run, bench, summary } from 'mitata';
-import { vectorize, vectorizeRaw, vectorizeRawSync, vectorizeRawToCallback, vectorizeSync } from '../index.js';
+import {
+  isEOF,
+  vectorize,
+  vectorizeRaw,
+  vectorizeRawSync,
+  vectorizeRawToCallback,
+  vectorizeSync,
+  vectorizeToCallback,
+} from '../index.js';
 // @ts-ignore
 import ImageTracer from 'imagetracerjs';
 import { Transformer } from '@napi-rs/image';
@@ -62,15 +70,41 @@ summary(() => {
     await vectorize(data);
   });
 
+  bench('@neplex/vectorizer encoded callback', async () => {
+    const chunks: string[] = [];
+    const { promise, resolve } = Promise.withResolvers<void>();
+
+    vectorizeToCallback(data, null, (chunk, progress) => {
+      chunks.push(chunk);
+
+      if (isEOF(chunk, progress)) {
+        resolve();
+      }
+    });
+
+    await promise;
+
+    chunks.join('');
+  });
+
   bench('@neplex/vectorizer raw async', async () => {
     await vectorizeRaw(pixels, size);
   });
 
   bench('@neplex/vectorizer raw callback', async () => {
     const chunks: string[] = [];
-    await vectorizeRawToCallback(pixels, size, null, ([chunk]) => {
+    const { promise, resolve } = Promise.withResolvers<void>();
+
+    vectorizeRawToCallback(pixels, size, null, (chunk, progress) => {
       chunks.push(chunk);
+
+      if (isEOF(chunk, progress)) {
+        resolve();
+      }
     });
+
+    await promise;
+
     chunks.join('');
   });
 

@@ -81,12 +81,12 @@ function requireNative() {
         const binding = require('@neplex/vectorizer-android-arm64');
         const bindingPackageVersion = require('@neplex/vectorizer-android-arm64/package.json').version;
         if (
-          bindingPackageVersion !== '0.1.0' &&
+          bindingPackageVersion !== '0.0.5' &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+            `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
           );
         }
         return binding;
@@ -103,12 +103,12 @@ function requireNative() {
         const binding = require('@neplex/vectorizer-android-arm-eabi');
         const bindingPackageVersion = require('@neplex/vectorizer-android-arm-eabi/package.json').version;
         if (
-          bindingPackageVersion !== '0.1.0' &&
+          bindingPackageVersion !== '0.0.5' &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+            `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
           );
         }
         return binding;
@@ -129,12 +129,12 @@ function requireNative() {
         const binding = require('@neplex/vectorizer-win32-x64-msvc');
         const bindingPackageVersion = require('@neplex/vectorizer-win32-x64-msvc/package.json').version;
         if (
-          bindingPackageVersion !== '0.1.0' &&
+          bindingPackageVersion !== '0.0.5' &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+            `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
           );
         }
         return binding;
@@ -151,12 +151,12 @@ function requireNative() {
         const binding = require('@neplex/vectorizer-win32-ia32-msvc');
         const bindingPackageVersion = require('@neplex/vectorizer-win32-ia32-msvc/package.json').version;
         if (
-          bindingPackageVersion !== '0.1.0' &&
+          bindingPackageVersion !== '0.0.5' &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+            `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
           );
         }
         return binding;
@@ -173,12 +173,12 @@ function requireNative() {
         const binding = require('@neplex/vectorizer-win32-arm64-msvc');
         const bindingPackageVersion = require('@neplex/vectorizer-win32-arm64-msvc/package.json').version;
         if (
-          bindingPackageVersion !== '0.1.0' &&
+          bindingPackageVersion !== '0.0.5' &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+            `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
           );
         }
         return binding;
@@ -198,12 +198,12 @@ function requireNative() {
       const binding = require('@neplex/vectorizer-darwin-universal');
       const bindingPackageVersion = require('@neplex/vectorizer-darwin-universal/package.json').version;
       if (
-        bindingPackageVersion !== '0.1.0' &&
+        bindingPackageVersion !== '0.0.5' &&
         process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
         process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
       ) {
         throw new Error(
-          `Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+          `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
         );
       }
       return binding;
@@ -220,12 +220,12 @@ function requireNative() {
         const binding = require('@neplex/vectorizer-darwin-x64');
         const bindingPackageVersion = require('@neplex/vectorizer-darwin-x64/package.json').version;
         if (
-          bindingPackageVersion !== '0.1.0' &&
+          bindingPackageVersion !== '0.0.5' &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+            `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
           );
         }
         return binding;
@@ -242,12 +242,12 @@ function requireNative() {
         const binding = require('@neplex/vectorizer-darwin-arm64');
         const bindingPackageVersion = require('@neplex/vectorizer-darwin-arm64/package.json').version;
         if (
-          bindingPackageVersion !== '0.1.0' &&
+          bindingPackageVersion !== '0.0.5' &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+            `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
           );
         }
         return binding;
@@ -268,12 +268,12 @@ function requireNative() {
         const binding = require('@neplex/vectorizer-freebsd-x64');
         const bindingPackageVersion = require('@neplex/vectorizer-freebsd-x64/package.json').version;
         if (
-          bindingPackageVersion !== '0.1.0' &&
+          bindingPackageVersion !== '0.0.5' &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+            `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
           );
         }
         return binding;
@@ -290,12 +290,12 @@ function requireNative() {
         const binding = require('@neplex/vectorizer-freebsd-arm64');
         const bindingPackageVersion = require('@neplex/vectorizer-freebsd-arm64/package.json').version;
         if (
-          bindingPackageVersion !== '0.1.0' &&
+          bindingPackageVersion !== '0.0.5' &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+            `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
           );
         }
         return binding;
@@ -317,12 +317,12 @@ function requireNative() {
           const binding = require('@neplex/vectorizer-linux-x64-musl');
           const bindingPackageVersion = require('@neplex/vectorizer-linux-x64-musl/package.json').version;
           if (
-            bindingPackageVersion !== '0.1.0' &&
+            bindingPackageVersion !== '0.0.5' &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+              `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
             );
           }
           return binding;
@@ -339,12 +339,12 @@ function requireNative() {
           const binding = require('@neplex/vectorizer-linux-x64-gnu');
           const bindingPackageVersion = require('@neplex/vectorizer-linux-x64-gnu/package.json').version;
           if (
-            bindingPackageVersion !== '0.1.0' &&
+            bindingPackageVersion !== '0.0.5' &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+              `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
             );
           }
           return binding;
@@ -363,12 +363,12 @@ function requireNative() {
           const binding = require('@neplex/vectorizer-linux-arm64-musl');
           const bindingPackageVersion = require('@neplex/vectorizer-linux-arm64-musl/package.json').version;
           if (
-            bindingPackageVersion !== '0.1.0' &&
+            bindingPackageVersion !== '0.0.5' &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+              `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
             );
           }
           return binding;
@@ -385,12 +385,12 @@ function requireNative() {
           const binding = require('@neplex/vectorizer-linux-arm64-gnu');
           const bindingPackageVersion = require('@neplex/vectorizer-linux-arm64-gnu/package.json').version;
           if (
-            bindingPackageVersion !== '0.1.0' &&
+            bindingPackageVersion !== '0.0.5' &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+              `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
             );
           }
           return binding;
@@ -409,12 +409,12 @@ function requireNative() {
           const binding = require('@neplex/vectorizer-linux-arm-musleabihf');
           const bindingPackageVersion = require('@neplex/vectorizer-linux-arm-musleabihf/package.json').version;
           if (
-            bindingPackageVersion !== '0.1.0' &&
+            bindingPackageVersion !== '0.0.5' &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+              `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
             );
           }
           return binding;
@@ -431,12 +431,12 @@ function requireNative() {
           const binding = require('@neplex/vectorizer-linux-arm-gnueabihf');
           const bindingPackageVersion = require('@neplex/vectorizer-linux-arm-gnueabihf/package.json').version;
           if (
-            bindingPackageVersion !== '0.1.0' &&
+            bindingPackageVersion !== '0.0.5' &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+              `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
             );
           }
           return binding;
@@ -455,12 +455,12 @@ function requireNative() {
           const binding = require('@neplex/vectorizer-linux-loong64-musl');
           const bindingPackageVersion = require('@neplex/vectorizer-linux-loong64-musl/package.json').version;
           if (
-            bindingPackageVersion !== '0.1.0' &&
+            bindingPackageVersion !== '0.0.5' &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+              `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
             );
           }
           return binding;
@@ -477,12 +477,12 @@ function requireNative() {
           const binding = require('@neplex/vectorizer-linux-loong64-gnu');
           const bindingPackageVersion = require('@neplex/vectorizer-linux-loong64-gnu/package.json').version;
           if (
-            bindingPackageVersion !== '0.1.0' &&
+            bindingPackageVersion !== '0.0.5' &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+              `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
             );
           }
           return binding;
@@ -501,12 +501,12 @@ function requireNative() {
           const binding = require('@neplex/vectorizer-linux-riscv64-musl');
           const bindingPackageVersion = require('@neplex/vectorizer-linux-riscv64-musl/package.json').version;
           if (
-            bindingPackageVersion !== '0.1.0' &&
+            bindingPackageVersion !== '0.0.5' &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+              `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
             );
           }
           return binding;
@@ -523,12 +523,12 @@ function requireNative() {
           const binding = require('@neplex/vectorizer-linux-riscv64-gnu');
           const bindingPackageVersion = require('@neplex/vectorizer-linux-riscv64-gnu/package.json').version;
           if (
-            bindingPackageVersion !== '0.1.0' &&
+            bindingPackageVersion !== '0.0.5' &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+              `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
             );
           }
           return binding;
@@ -546,12 +546,12 @@ function requireNative() {
         const binding = require('@neplex/vectorizer-linux-ppc64-gnu');
         const bindingPackageVersion = require('@neplex/vectorizer-linux-ppc64-gnu/package.json').version;
         if (
-          bindingPackageVersion !== '0.1.0' &&
+          bindingPackageVersion !== '0.0.5' &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+            `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
           );
         }
         return binding;
@@ -568,12 +568,12 @@ function requireNative() {
         const binding = require('@neplex/vectorizer-linux-s390x-gnu');
         const bindingPackageVersion = require('@neplex/vectorizer-linux-s390x-gnu/package.json').version;
         if (
-          bindingPackageVersion !== '0.1.0' &&
+          bindingPackageVersion !== '0.0.5' &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+            `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
           );
         }
         return binding;
@@ -594,12 +594,12 @@ function requireNative() {
         const binding = require('@neplex/vectorizer-openharmony-arm64');
         const bindingPackageVersion = require('@neplex/vectorizer-openharmony-arm64/package.json').version;
         if (
-          bindingPackageVersion !== '0.1.0' &&
+          bindingPackageVersion !== '0.0.5' &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+            `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
           );
         }
         return binding;
@@ -616,12 +616,12 @@ function requireNative() {
         const binding = require('@neplex/vectorizer-openharmony-x64');
         const bindingPackageVersion = require('@neplex/vectorizer-openharmony-x64/package.json').version;
         if (
-          bindingPackageVersion !== '0.1.0' &&
+          bindingPackageVersion !== '0.0.5' &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+            `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
           );
         }
         return binding;
@@ -638,12 +638,12 @@ function requireNative() {
         const binding = require('@neplex/vectorizer-openharmony-arm');
         const bindingPackageVersion = require('@neplex/vectorizer-openharmony-arm/package.json').version;
         if (
-          bindingPackageVersion !== '0.1.0' &&
+          bindingPackageVersion !== '0.0.5' &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+            `Native binding package version mismatch, expected 0.0.5 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
           );
         }
         return binding;
@@ -710,13 +710,20 @@ module.exports = nativeBinding;
 module.exports.SvgFile = nativeBinding.SvgFile;
 module.exports.JsSvgFile = nativeBinding.JsSvgFile;
 module.exports.colorExistsInImage = nativeBinding.colorExistsInImage;
+module.exports.colorExistsInImageSync = nativeBinding.colorExistsInImageSync;
 module.exports.ColorMode = nativeBinding.ColorMode;
 module.exports.findUnusedColorInImage = nativeBinding.findUnusedColorInImage;
+module.exports.findUnusedColorInImageSync = nativeBinding.findUnusedColorInImageSync;
 module.exports.Hierarchical = nativeBinding.Hierarchical;
+module.exports.optimize = nativeBinding.optimize;
+module.exports.OptimizePreset = nativeBinding.OptimizePreset;
+module.exports.JsOptimizePreset = nativeBinding.JsOptimizePreset;
+module.exports.optimizeSync = nativeBinding.optimizeSync;
 module.exports.PathSimplifyMode = nativeBinding.PathSimplifyMode;
 module.exports.JsPathSimplifyMode = nativeBinding.JsPathSimplifyMode;
 module.exports.Preset = nativeBinding.Preset;
 module.exports.readImage = nativeBinding.readImage;
+module.exports.readImageSync = nativeBinding.readImageSync;
 module.exports.vectorize = nativeBinding.vectorize;
 module.exports.vectorizeRaw = nativeBinding.vectorizeRaw;
 module.exports.vectorizeRawSync = nativeBinding.vectorizeRawSync;

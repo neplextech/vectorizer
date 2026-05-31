@@ -5,25 +5,35 @@ use visioncortex::PathSimplifyMode;
 
 use napi_derive::*;
 
+/// Preconfigured vectorization settings.
 #[napi]
 #[derive(Clone)]
 pub enum Preset {
+  /// Black and white tracing preset.
   Bw,
+  /// Poster-like color tracing preset.
   Poster,
+  /// Photo-like color tracing preset.
   Photo,
 }
 
+/// Input color interpretation mode.
 #[napi]
 #[derive(Clone)]
 pub enum ColorMode {
+  /// Trace the image using color clusters.
   Color,
+  /// Trace the image as a black and white image.
   Binary,
 }
 
+/// Color image layer composition mode.
 #[napi]
 #[derive(Clone)]
 pub enum Hierarchical {
+  /// Render traced layers stacked on top of each other.
   Stacked,
+  /// Render traced layers as cutouts.
   Cutout,
 }
 
