@@ -2,6 +2,9 @@
 
 Node.js library to convert raster images to svg using [VTracer](https://github.com/visioncortex/vtracer), with time complexity of `O(n)`.
 
+> [!TIP]
+> **Browser example:** See [twlite/vectorizer-playground](https://github.com/twlite/vectorizer-playground) for a complete browser example. Due to current WASI limitations in browsers, the async APIs may not work. The synchronous APIs work correctly when executed inside a Web Worker, which is covered by the example.
+
 ## CLI
 
 ```bash
